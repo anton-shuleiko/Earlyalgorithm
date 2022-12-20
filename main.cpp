@@ -73,31 +73,6 @@ bool Sentence::CheckNextSymbol() const {
   return rule_.next_arrow_[pos_of_point].is_terminal_;
 }
 
-Rules::Rules(const string& arrow_last, const string& next_arrow) {
-  if (arrow_last.empty()) {
-    throw invalid_argument(
-        "Error!\n"
-        "Format : [Left Part (empty)] -> [ . . . ]");
-  }
-
-  if (arrow_last.size() > 1) {
-    throw invalid_argument(
-        "Error\n"
-        "Format : [Left Part (more than 1 symbol)] -> [ . . . ]");
-  }
-
-  arrow_last_ = Symbol(arrow_last[0]);
-  if (arrow_last_.is_terminal_) {
-    throw invalid_argument(
-        "Error\n"
-        "Format : [Left Part (lower cays)] -> [ . . . ]");
-  }
-
-  for (const char& symbol : next_arrow) {
-    next_arrow_.emplace_back(symbol);
-  }
-}
-
 char Sentence::GetNextSymbol() const {
   return rule_.next_arrow_[pos_of_point].symbol_;
 }
